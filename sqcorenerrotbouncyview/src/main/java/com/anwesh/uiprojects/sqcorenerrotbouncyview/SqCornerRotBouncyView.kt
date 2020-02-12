@@ -220,4 +220,13 @@ class SqCornerRotBouncyView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : SqCornerRotBouncyView {
+            val view : SqCornerRotBouncyView = SqCornerRotBouncyView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
