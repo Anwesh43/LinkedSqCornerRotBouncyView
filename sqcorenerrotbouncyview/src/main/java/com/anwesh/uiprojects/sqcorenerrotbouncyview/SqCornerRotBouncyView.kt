@@ -33,7 +33,7 @@ fun Canvas.drawSqRotBouncy(i : Int, scale : Float, size : Float, paint : Paint) 
     val sf : Float = scale.sinify().divideScale(i, lines)
     val lSize : Float = size / lSizeFactor
     save()
-    rotate(rot * sf)
+    rotate(rot * i + rot * sf)
     save()
     translate(size, -size)
     for (j in 0..1) {
@@ -47,7 +47,9 @@ fun Canvas.drawSqRotBouncy(i : Int, scale : Float, size : Float, paint : Paint) 
 }
 
 fun Canvas.drawCornerRotSqs(scale : Float, size : Float, paint : Paint) {
-    for (j in 0..(lines - 1)) {
+    val scDiv : Double = 1.0 / lines
+    val k : Int = Math.floor(scale.sinify() / scDiv).toInt()
+    for (j in 0..k) {
         drawSqRotBouncy(j, scale, size, paint)
     }
 }
