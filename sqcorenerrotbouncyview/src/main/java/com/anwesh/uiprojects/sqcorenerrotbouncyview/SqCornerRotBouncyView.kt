@@ -198,4 +198,26 @@ class SqCornerRotBouncyView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : SqCornerRotBouncyView) {
+
+        private val animator : Animator = Animator(view)
+        private val scrb : SqCornerRotBouncy = SqCornerRotBouncy(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            scrb.draw(canvas, paint)
+            animator.animate {
+                scrb.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            scrb.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
